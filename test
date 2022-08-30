@@ -1,0 +1,107 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("TheHub", "GrapeTheme")
+
+-- main
+local Main = Window:NewTab("scripts")
+local MainSection = Main:NewSection("scripts")
+
+MainSection:NewButton("Cmd-X", "A admin script", function()
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/CMD-X/CMD-X/master/Source", true))()
+end)
+
+MainSection:NewButton("prison life admin commands", "A script for prison life", function()
+    loadstring(game:HttpGet(('https://raw.githubusercontent.com/XTheMasterX/Scripts/Main/PrisonLife'),true))()
+end)
+MainSection:NewButton("legend piece script", "A script for legend piece", function()
+    local singlekey = "G" -- kills nearest mob
+
+--some setup
+local StarterGui = game:GetService("StarterGui")
+local UserInputService = game:GetService('UserInputService')
+
+local LocalPlayer = game:GetService('Players').LocalPlayer
+
+local mobs = game:GetService("Workspace").Monster
+
+local function getNearestMob()
+   local closest
+   local closestmagnitude
+
+   for _,mob in pairs(mobs:GetChildren()) do
+       local distance = LocalPlayer:DistanceFromCharacter(mob.PrimaryPart.Position)
+       if closest and distance < closestmagnitude then
+           closestmagnitude = distance
+           closest = mob
+       elseif not closest then
+           closestmagnitude = distance
+           closest = mob
+       end
+   end
+   return closest
+end
+
+StarterGui:SetCore("SendNotification", {
+   Title = "Legned Piece Kill mob";
+   Text = "Made by: CompileError"
+})
+
+--the script
+
+UserInputService.InputBegan:Connect(function(input, gameProcessedEvent)
+   if not gameProcessedEvent then
+       local keycode = input.KeyCode
+       if input.UserInputType == Enum.UserInputType.Keyboard then
+           local keycode = input.KeyCode
+           if keycode == Enum.KeyCode[singlekey] then
+               local mob = getNearestMob()
+               mob.UpperTorso:Destroy() --insta kill I know so difficult the most complex script
+               StarterGui:SetCore("SendNotification", {
+                   Title = "killed nearest mob";
+                   Text = "/me dabs"
+               })
+           end
+       end
+   end
+end)
+end)
+
+MainSection:NewButton("Hotel Elephant give everybody money", "A script for prison life", function()
+    local bool = false
+local num = 99999999999999999
+local remote = "Cash"
+
+for _,v in pairs(game.Players:GetChildren()) do
+game:GetService("ReplicatedStorage").MoneyRequest:FireServer(bool, num, remote, v)
+end
+end)
+MainSection:NewButton("My Restaurant script ", "A script for prison life", function()
+    loadstring(game:HttpGet("https://rawscripts.net/raw/My-Restaurant!-Fast-Autofarm-4610"))()
+end)
+MainSection:NewButton("spellbound give inf money", "A script for prison life", function()
+    while task.wait() do
+   game:GetService("ReplicatedStorage").Events.GrantItem:FireServer("Wand48")
+   game:GetService("ReplicatedStorage").Events.Coins2:FireServer("Wand48")
+end
+end)
+
+-- local player 
+local Player = Window:NewTab("Player")
+local PlayerSection = Player:NewSection("Player")
+
+ PlayerSection:NewSlider("Walkspeed", "walk faster you retard", 500, 16, function(s)
+  game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = s
+ end)
+  
+  PlayerSection:NewSlider("Jumppower", "Jump like a bunny", 350, 50, function(s)
+    game.Players.LocalPlayer.Character.Humanoid.JumpPower = s
+end)
+
+PlayerSection:NewButton("Reset ws/jp", "i wonder what it does", function()
+    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = 16
+    game.Players.LocalPlayer.Character.Humanoid.JumpPdsower = 50
+end)
+
+
+-- other
+local Main = Window:NewTab("soon to come out")
+local MainSection = Main:NewSection("soon to come out")
